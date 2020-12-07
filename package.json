@@ -1,0 +1,15 @@
+{
+  "name": "crystal",
+  "version": "1.0.0",
+  "description": "A prototype Java Mindustry mod that works on Android and PC.",
+  "main": "src/crystal/core/Crystal.java",
+  "scripts": {
+    "build_desktop": "gradlew.bat jar"
+  },
+  "keywords": [
+    "Mindustry",
+    "Crystal"
+  ],
+  "author": "AmateurPotion",
+  "license": "MIT"
+}
