@@ -1,6 +1,5 @@
 package crystal.content;
 
-import mindustry.ui.*;
 import mindustry.ctype.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -20,7 +19,5 @@ public class MBlocks implements ContentList {
             requirements(Category.defense, with(Items.copper, 6));
             health = 80 * wallHealthMultiplier;
         }};
-        Fonts.loadFonts();
-        Fonts.loadContentIcons();
     }
 }
