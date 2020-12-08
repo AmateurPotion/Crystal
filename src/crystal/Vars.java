@@ -3,7 +3,8 @@ package crystal;
 import arc.files.*;
 import arc.assets.*;
 
-import crystal.ui.*;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseOptions;
 
 public class Vars implements Loadable{
     /** crystal edition main data directory **/
@@ -14,4 +15,6 @@ public class Vars implements Loadable{
     public static Boolean mainServerConnected;
     /** Debug mode. **/
     public static Boolean debugMode = false;
+    /** Firebase config **/
+    public static Firestore firebaseDBFirestore;
 }

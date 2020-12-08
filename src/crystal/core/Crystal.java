@@ -10,6 +10,8 @@ import crystal.io.*;
 import crystal.content.ContentsLoader;
 import crystal.ui.*;
 
+import java.util.concurrent.ExecutionException;
+
 import static crystal.Vars.*;
 
 public class Crystal extends Mod {
@@ -17,7 +19,12 @@ public class Crystal extends Mod {
         Log.info("[royal]Crystal edition[] constructor loaded.");
 
         Events.on(ClientLoadEvent.class, e -> {
-            new Initializer().init();
+            try {
+                new Initializer().init();
+            } catch (ExecutionException | InterruptedException executionException) {
+                Log.info(executionException);
+            }
+
             new CustomUiList().init();
             new ContentsLoader().load();
             if (debugMode) {
