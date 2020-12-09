@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutionException;
 
 import static crystal.Vars.*;
 
+@SuppressWarnings("unused")
 public class Crystal extends Mod {
     public Crystal(){
         Log.info("[royal]Crystal edition[] constructor loaded.");
