@@ -4,7 +4,6 @@ import arc.files.*;
 import arc.assets.*;
 
 import com.google.cloud.firestore.Firestore;
-import com.google.firebase.FirebaseOptions;
 
 public class Vars implements Loadable{
     /** crystal edition main data directory **/
