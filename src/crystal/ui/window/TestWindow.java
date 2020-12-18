@@ -5,11 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import arc.util.*;
 
+import crystal.io.SocketManager;
 import crystal.ui.dialog.*;
 
-@SuppressWarnings("serial")
+import static crystal.Vars.*;
+
 public class TestWindow extends JPanel {
-    JButton log, vd;
+    JButton log, vd, socketConnect;
     // private static final long serialVersionUID =12;
 
     public TestWindow() {
@@ -19,25 +21,18 @@ public class TestWindow extends JPanel {
     public void design() {
         log = new JButton("log");
         vd = new JButton("view dialog");
+        socketConnect = new JButton("connect");
 
         JPanel new1jp = new JPanel();
 
-        log.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Log.info("window.");
-            }
-        });
+        log.addActionListener(e -> Log.info("window."));
 
-        vd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new TestDialog();
-            }
-        });
+        vd.addActionListener(e -> new TestDialog());
 
+        socketConnect.addActionListener(e -> new SocketManager().receiver());
         new1jp.add(log);
         new1jp.add(vd);
+        if(onlineMode) { new1jp.add(socketConnect); }
 
         this.add(new1jp);
     }

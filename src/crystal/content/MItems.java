@@ -5,12 +5,12 @@ import mindustry.ctype.ContentList;
 import mindustry.type.Item;
 
 public class MItems implements ContentList {
-    public static Item testitem;
+    public static Item coreResource;
 
     @Override
     public void load() {
-        testitem = new Item("testitem", Color.valueOf("d99d73")){{
-            cost = 1;
+        coreResource = new Item("core-resource", Color.valueOf("d99d73")){{
+            cost = 100;
         }};
     }
 }

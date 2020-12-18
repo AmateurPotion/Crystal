@@ -10,7 +10,6 @@ public class TestDialog extends BaseDialog {
     public TestDialog(){
         super("@crystal.testdialog");
 
-        setup();
         shown(this::setup);
     }
 

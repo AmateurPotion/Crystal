@@ -1,23 +1,29 @@
 package crystal.content;
 
+import mindustry.content.Items;
 import mindustry.ctype.*;
-import mindustry.type.*;
+import mindustry.type.Category;
 import mindustry.world.*;
-import mindustry.world.blocks.defense.*;
-import mindustry.content.*;
+import mindustry.world.meta.BuildVisibility;
+
+import crystal.content.*;
+import crystal.world.blocks.artifact.*;
+import crystal.world.module.*;
 
 import static mindustry.type.ItemStack.*;
 
 public class MBlocks implements ContentList {
-    public static Block test;
+    public static Block charger, testBlock;
 
     @Override
     public void load() {
-        int wallHealthMultiplier = 4;
+        charger = new ArtifactActivator("charger"){{
+            requirements(Category.effect, with(MItems.coreResource, 1, Items.copper, 1000, Items.lead, 500));
+            size = 1;
+        }};
 
-        test = new Wall("testwall"){{
-            requirements(Category.defense, with(Items.copper, 6));
-            health = 80 * wallHealthMultiplier;
+        testBlock = new TestBlock("test-block"){{
+
         }};
     }
 }

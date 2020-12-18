@@ -5,17 +5,21 @@ import arc.func.Prov;
 
 import mindustry.ctype.*;
 import mindustry.content.*;
+import mindustry.type.Category;
 import mindustry.world.Block;
+import mindustry.world.blocks.campaign.Accelerator;
+import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.production.GenericCrafter;
+import mindustry.world.blocks.units.Reconstructor;
 import mindustry.world.meta.BuildVisibility;
 
-import crystal.content.*;
+import crystal.content.MItems;
 
 import static mindustry.type.ItemStack.*;
 
 public class BlockOverwrite extends Blocks implements ContentList {
     private static final Prov<Block[]> hideArray = () -> new Block[]{
-            melter
+            melter, interplanetaryAccelerator
     };
 
     @SuppressWarnings("unchecked")
@@ -27,13 +31,13 @@ public class BlockOverwrite extends Blocks implements ContentList {
     public void load(){
         for(Block block : hideArray.get()) { block.buildVisibility = BuildVisibility.sandboxOnly; }
 
-        /*
-        OverWrite(melter, (GenericCrafter t) -> {
-            t.buildCost = 1;
-            t.requirements = with(Items.copper, 10, MItems.testitem, 20);
+        OverWrite(interplanetaryAccelerator, (Accelerator t) -> {
+            t.alwaysUnlocked = true;
+            t.requirements(Category.effect, BuildVisibility.campaignOnly, with(Items.copper, 1));
         });
-         */
-
-        // coreNucleus.health = 100000;
+        /* OverWrite(melter, (GenericCrafter t) -> {
+            t.buildCost = 1;
+            t.requirements = with(Items.copper, 10);
+        }); */
     }
 }

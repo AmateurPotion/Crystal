@@ -20,12 +20,7 @@ public class Crystal extends Mod {
         Log.info("[royal]Crystal edition[] constructor loaded.");
 
         Events.on(ClientLoadEvent.class, e -> {
-            try {
-                new Initializer().init();
-            } catch (ExecutionException | InterruptedException executionException) {
-                Log.info(executionException);
-            }
-
+            new Initializer().init();
             new CustomUiList().init();
             new ContentsLoader().load();
             if (debugMode) {
