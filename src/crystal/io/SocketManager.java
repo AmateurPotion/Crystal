@@ -3,9 +3,7 @@ package crystal.io;
 import arc.util.Log;
 
 import java.io.*;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 
 public class SocketManager {
     private String host = "localhost";

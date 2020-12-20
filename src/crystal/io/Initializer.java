@@ -20,7 +20,9 @@ public class Initializer {
     public void init() {
         onlineMode = netConnection();
 
-        if(debugMode){ new TestWindow().draw(); }
+        if(debugMode) {
+            new TestWindow().draw();
+        }
 
         Fi tempFi;
         tempFi = new Fi(modDirectory.toString() + "/Crystal/data");
@@ -53,10 +55,8 @@ public class Initializer {
 
         try{
             socket.connect(tempISA, 3000);
-            Log.info("connected");
             socket.close();
         } catch (Exception e){
-            Log.info("not connected");
             connected = false;
         }
         return connected;
