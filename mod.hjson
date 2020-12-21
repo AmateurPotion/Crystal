@@ -1,0 +1,8 @@
+name: "crystal-cs"
+displayName: "C#rystal edition"
+author: "AmateurPotion"
+main: "crystal.core.Crystal"
+description: "A C# mod."
+version: 1.0
+minGameVersion: 120
+
