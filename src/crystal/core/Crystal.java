@@ -26,8 +26,6 @@ public class Crystal extends Mod {
             }
         });
 
-
-
         Events.on(WorldLoadEvent.class, e -> {
             if (debugMode) {
                 Log.info("world load");
