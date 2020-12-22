@@ -4,9 +4,7 @@ import mindustry.content.Items;
 import mindustry.ctype.*;
 import mindustry.type.Category;
 import mindustry.world.*;
-import mindustry.world.meta.BuildVisibility;
 
-import crystal.content.*;
 import crystal.world.blocks.artifact.*;
 import crystal.world.module.*;
 

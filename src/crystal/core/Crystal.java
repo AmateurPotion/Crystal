@@ -10,8 +10,6 @@ import crystal.io.*;
 import crystal.content.ContentsLoader;
 import crystal.ui.*;
 
-import java.util.concurrent.ExecutionException;
-
 import static crystal.Vars.*;
 
 @SuppressWarnings("unused")
