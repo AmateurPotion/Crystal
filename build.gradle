@@ -14,10 +14,9 @@ repositories{
 }
 
 ext{
-    //the build number that this mod is made for
     mindustryVersion = 'v121'
-    //version of SDK you will be using
     sdkVersion = '30'
+    steamworksVersion = '891ed912791e01fe9ee6237a6497e5212b85c256'
     sdkRoot = System.getenv("ANDROID_HOME")
 
     doExec = { cmd ->
@@ -33,14 +32,14 @@ allprojects{
             options.compilerArgs.addAll(['--release', '8'])
         }
     }
-}
 
-dependencies{
-    compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
-    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
-    compileOnly files('lib/annotations-121.jar')
-    compile 'com.google.cloud:google-cloud-storage:1.113.4'
-    compile 'com.google.firebase:firebase-admin:6.11.0'
+    dependencies{
+        compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+        compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+        compileOnly "com.github.Anuken:steamworks4j:$steamworksVersion"
+        compileOnly files('lib/annotations-121.jar')
+    }
+
 }
 
 task jarAndroid{
@@ -65,7 +64,6 @@ jar{
 
     from(rootDir){
         include "mod.hjson"
-        include "GamerStudio-ca6e9e9bdf74.json"
     }
 
     from("assets/"){
