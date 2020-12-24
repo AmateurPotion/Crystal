@@ -3,6 +3,9 @@ package crystal.io;
 import arc.files.*;
 import arc.util.*;
 
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.cloud.FirestoreClient;
 import mindustry.ui.dialogs.BaseDialog;
 
 import java.net.InetSocketAddress;
@@ -19,6 +22,23 @@ public class Initializer {
 
     public void init() {
         onlineMode = netConnection();
+        /* TODO : 널포인터 문제 해결하기
+        if(onlineMode) {
+            new FirebaseSetup().init();
+            FirebaseApp.initializeApp(firebaseOptions);
+            Firestore db = FirestoreClient.getFirestore();
+            db.collection("Crystal").addSnapshotListener( (target, exception)->{
+                Log.info(" - select start - ");
+                if (target != null) {
+                    target.forEach( item->{
+                        Log.info("primary id : "+item.getId() + "  ||  value : " + item.getData());
+                    });
+                }
+                Log.info(" - select end - ");
+            });
+            Log.info("init end");
+        }
+        */
 
         if(debugMode) {
             new TestWindow().draw();

@@ -65,6 +65,7 @@ jar{
 
     from(rootDir){
         include "mod.hjson"
+        include "GamerStudio-ca6e9e9bdf74.json"
     }
 
     from("assets/"){
