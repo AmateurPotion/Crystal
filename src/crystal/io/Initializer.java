@@ -20,6 +20,10 @@ public class Initializer {
     public void init() {
         onlineMode = netConnection();
 
+        if(onlineMode) {
+            new GithubDatabase().init();
+        }
+
         if(debugMode) {
             new TestWindow().draw();
         }
