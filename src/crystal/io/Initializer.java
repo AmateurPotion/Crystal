@@ -2,8 +2,8 @@ package crystal.io;
 
 import arc.files.*;
 import arc.util.*;
-
 import arc.util.serialization.Jval;
+
 import mindustry.ui.dialogs.BaseDialog;
 
 import java.net.InetSocketAddress;
@@ -15,17 +15,17 @@ import static mindustry.Vars.*;
 import static crystal.Vars.*;
 
 public class Initializer {
-    private GithubDatabase githubDatabase;
 
     public Initializer(){}
 
     public void init() {
+        GithubDatabase githubDatabase = new GithubDatabase();
         onlineMode = netConnection();
 
         if(onlineMode) {
-            githubDatabase.init();
-            Jval test = githubDatabase.getDatabase("Info");
-            Log.info(test.getString("notice"));
+            new GithubDatabase().init();
+            //Jval test = githubDatabase.getDatabase("Info");
+            //Log.info(test.getString("notice"));
         }
 
         if(debugMode) {
