@@ -1,5 +1,9 @@
 {
   "language-path" : {
     "en" : ""
-  }
+  },
+  "notice" : [
+    "Hello!",
+    "Test notice"
+  ]
 }

@@ -8,10 +8,12 @@ import arc.util.serialization.Jval;
 import static crystal.Vars.*;
 
 public class GithubDatabase {
-    public Jval getDatabase(String path){
+    private final String databaseFormat = ".json";
+
+    public Jval getDatabase(String gitPath){
         final Jval[] jval = new Jval[1];
 
-        Core.net.httpGet(path, res -> {
+        Core.net.httpGet(databaseRoot + gitPath + databaseFormat, res -> {
             if(res.getStatus() == Net.HttpStatus.OK){
                 jval[0] = Jval.read(res.getResultAsString());
             }
@@ -27,10 +29,10 @@ public class GithubDatabase {
         databaseRoot = jval.getString("settings-version" + jval.getString("version","1"), "https://raw.githubusercontent.com/AmateurPotion/Crystal/main/SimpleDatabase/Pre-release-1/");
     }
 
-    public String getText(String path){
+    public String getText(String gitPath){
         final String[] result = new String[1];
 
-        Core.net.httpGet(path, res -> {
+        Core.net.httpGet(databaseRoot + gitPath, res -> {
             if(res.getStatus() == Net.HttpStatus.OK){
                 result[0] = res.getResultAsString();
             }
@@ -39,7 +41,7 @@ public class GithubDatabase {
         return result[0];
     }
 
-    public void downloadFile(String path, Fi where, Boolean waitAble){
+    public void downloadFile(String gitPath, Fi downloadPath, Boolean waitAble){
 
     }
 
