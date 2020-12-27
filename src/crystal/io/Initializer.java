@@ -23,7 +23,7 @@ public class Initializer {
         onlineMode = netConnection();
 
         if(onlineMode) {
-            new GithubDatabase().init();
+            githubDatabase.init();
             //Jval test = githubDatabase.getDatabase("Info");
             //Log.info(test.getString("notice"));
         }

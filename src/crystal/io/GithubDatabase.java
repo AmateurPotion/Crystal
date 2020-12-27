@@ -4,37 +4,44 @@ import arc.Core;
 import arc.Net;
 import arc.files.Fi;
 import arc.util.Log;
-import arc.util.Strings;
 import arc.util.serialization.Jval;
 
-import java.util.concurrent.atomic.AtomicReference;
-
-import static mindustry.Vars.*;
 import static crystal.Vars.*;
+import static mindustry.Vars.*;
 
 public class GithubDatabase {
-    private static Jval tempJval = null;
+    private static volatile String tempString;
 
-    public static Jval getDatabase(String gitPath){
-        Core.net.httpGet("https://raw.githubusercontent.com/AmateurPotion/Crystal/main/SimpleDatabase/DatabaseInfo.json", res -> {
-            if(res.getStatus() == Net.HttpStatus.OK){
-                tempJval = Jval.read(res.getResultAsString());
-                Log.info(res.getResultAsString());
+    public Jval getDatabase(String gitPath){
+        if(onlineMode){
+            ui.loadfrag.show("@database.process");
+            Core.net.httpGet(databaseRoot + gitPath, res -> {
+                if (res.getStatus() == Net.HttpStatus.OK) {
+                    String temp = res.getResultAsString();
+                    Log.info(temp);
+                    tempString = temp;
+                }} , error -> {});
+
+            /** wait for web data receive **/
+            while (tempString == null) {}
+            if(tempString != null){
+                ui.loadfrag.hide();
             }
-        }, error -> {});
-
-        Log.info("test");
-        return tempJval;
+        }
+        Log.info(tempString);
+        Jval jval = Jval.read(tempString);
+        tempString = null;
+        return jval;
     }
 
     /** 모드 진입 후 네트워크 체크한 뒤에 한번만 초기화해도 충분함. 자주해서 렉걸려도 책임안짐 ㅅㄱ
      * 네트워크 체크 안 하고 이거 쓰면 게임 팅길 확률이 매우 높으니 주의! **/
     public void init(){
         getDatabase("Database.json");
-        //Jval jval = getDatabase("DatabaseInfo.json");
-        //int version = Strings.parseInt(jval.getString("version", "1"));
-        //Jval temp = Jval.read(jval.getString("settings-version" + version));
-        //databaseRoot = temp.getString("root", "https://raw.githubusercontent.com/AmateurPotion/Crystal/main/SimpleDatabase/Pre-release-1/");
+        Jval jval = getDatabase("DatabaseInfo.json");
+        String version = jval.getString("version", "1");
+        Jval temp = Jval.read(jval.getString("settings-version" + version));
+        databaseRoot = temp.getString("root", "https://raw.githubusercontent.com/AmateurPotion/Crystal/main/SimpleDatabase/Pre-release-1/");
     }
 
     public String getText(String gitPath){
