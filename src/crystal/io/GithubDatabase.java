@@ -15,15 +15,13 @@ public class GithubDatabase {
     public Jval getDatabase(String gitPath){
         if(onlineMode){
             ui.loadfrag.show("@database.process");
-            Core.net.httpGet(databaseRoot + gitPath, res -> {
-                if (res.getStatus() == Net.HttpStatus.OK) {
-                    String temp = res.getResultAsString();
-                    Log.info(temp);
-                    tempString = temp;
-                }} , error -> {});
-
-            /** wait for web data receive **/
-            while (tempString == null) {}
+            HttpResponse res = new BlockingHTTP.httpGet(databaseRoot + gitPath);
+            if (res.getStatus() == Net.HttpStatus.OK) {
+                String temp = res.getResultAsString();
+                Log.info(temp);
+                tempString = temp;
+            }
+            
             if(tempString != null){
                 ui.loadfrag.hide();
             }
