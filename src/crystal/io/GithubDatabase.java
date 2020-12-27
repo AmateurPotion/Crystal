@@ -2,6 +2,7 @@ package crystal.io;
 
 import arc.Core;
 import arc.Net;
+import arc.Net.*;
 import arc.files.Fi;
 import arc.util.Log;
 import arc.util.serialization.Jval;
@@ -15,17 +16,19 @@ public class GithubDatabase {
     public Jval getDatabase(String gitPath){
         if(onlineMode){
             ui.loadfrag.show("@database.process");
-            Core.net.httpGet(databaseRoot + gitPath, res -> {
-                if (res.getStatus() == Net.HttpStatus.OK) {
-                    String temp = res.getResultAsString();
-                    Log.info(temp);
-                    tempString = temp;
-                }} , error -> {});
+            synchronized(this) {
+                Core.net.httpGet(databaseRoot + gitPath, res -> {
+                    if (res.getStatus() == Net.HttpStatus.OK) {
+                        String temp = res.getResultAsString();
+                        Log.info(temp);
+                        tempString = temp;
+                    }} , error -> {});
 
-            /** wait for web data receive **/
-            while (tempString == null) {}
-            if(tempString != null){
-                ui.loadfrag.hide();
+                /** wait for web data receive **/
+                while (tempString == null) {}
+                if(tempString != null){
+                    ui.loadfrag.hide();
+                }
             }
         }
         Log.info(tempString);
