@@ -4,16 +4,13 @@ import java.util.concurrent.CountDownLatch;
 
 import arc.Core;
 import arc.Net;
-import arc.struct.*;
-import arc.func.Cons;
-import arc.util.*;
 
 public class BlockingHTTP {
     private final CountDownLatch reqLatch = new CountDownLatch (1);
-    private volatile HttpResponse resp;
+    private volatile Net.HttpResponse resp;
     
     /** Sends a basic HTTP GET request.*/
-    public HttpResponse httpGet(String url) {
+    public Net.HttpResponse httpGet(String url) throws InterruptedException {
         synchronized(this) {
             Core.net.httpGet(url, res -> {
                     resp = res;
@@ -25,7 +22,7 @@ public class BlockingHTTP {
     }
 
     /** Sends a basic HTTP POST request.*/
-    public HttpResponse httpPost(String url, String content){
+    public Net.HttpResponse httpPost(String url, String content) throws InterruptedException {
         synchronized(this) {
             Core.net.httpPost(url, content, res -> {
                     resp = res;
