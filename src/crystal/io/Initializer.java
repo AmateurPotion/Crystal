@@ -24,8 +24,8 @@ public class Initializer {
 
         if(onlineMode) {
             githubDatabase.init();
-            //Jval test = githubDatabase.getDatabase("Info");
-            //Log.info(test.getString("notice"));
+            Jval test = githubDatabase.getDatabase("Info.json");
+            Log.info(test.get("notice"));
         }
 
         if(debugMode) {

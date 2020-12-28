@@ -14,14 +14,14 @@ public class GithubDatabase {
     private static volatile String tempString;
 
     public Jval getDatabase(String gitPath){
+        Jval jval;
+
         if(onlineMode){
             ui.loadfrag.show("@database.process");
             synchronized(this) {
                 Core.net.httpGet(databaseRoot + gitPath, res -> {
                     if (res.getStatus() == Net.HttpStatus.OK) {
-                        String temp = res.getResultAsString();
-                        Log.info(temp);
-                        tempString = temp;
+                        tempString = res.getResultAsString();
                     }} , error -> {});
 
                 /** wait for web data receive **/
@@ -31,9 +31,15 @@ public class GithubDatabase {
                 }
             }
         }
-        Log.info(tempString);
-        Jval jval = Jval.read(tempString);
+        if(!tempString.equals("404: Not Found")) {
+            jval = Jval.read(tempString);
+        } else {
+            jval = Jval.read("{ }");
+            jval.add("error", "404");
+        }
+
         tempString = null;
+
         return jval;
     }
 
@@ -42,7 +48,7 @@ public class GithubDatabase {
     public void init(){
         Jval jval = getDatabase("DatabaseInfo.json");
         String version = jval.getString("version", "1");
-        Jval temp = Jval.read(jval.getString("settings-version" + version));
+        Jval temp = jval.get("settings-version" + version);
         databaseRoot = temp.getString("root", "https://raw.githubusercontent.com/AmateurPotion/Crystal/main/SimpleDatabase/Pre-release-1/");
     }
 

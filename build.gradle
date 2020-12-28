@@ -14,7 +14,7 @@ repositories{
 }
 
 ext{
-    mindustryVersion = 'v121'
+    mindustryVersion = 'v122'
     sdkVersion = '30'
     steamworksVersion = '891ed912791e01fe9ee6237a6497e5212b85c256'
     sdkRoot = System.getenv("ANDROID_HOME")
