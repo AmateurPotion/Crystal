@@ -53,15 +53,23 @@ public class GithubDatabase {
     }
 
     public String getText(String gitPath){
-        final String[] result = new String[1];
+        String temp;
 
+        ui.loadfrag.show("@database.process");
         Core.net.httpGet(databaseRoot + gitPath, res -> {
             if(res.getStatus() == Net.HttpStatus.OK){
-                result[0] = res.getResultAsString();
+                tempString = res.getResultAsString();
             }
         }, error -> {});
+        while (tempString == null) {}
+        if(tempString != null){
+            ui.loadfrag.hide();
+        }
 
-        return result[0];
+        temp = tempString;
+        tempString = null;
+
+        return temp;
     }
 
     public void downloadFile(String gitPath, Fi downloadPath, Boolean waitAble){

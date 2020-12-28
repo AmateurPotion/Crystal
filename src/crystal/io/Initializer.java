@@ -1,13 +1,13 @@
 package crystal.io;
 
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
 import arc.files.*;
 import arc.util.*;
 import arc.util.serialization.Jval;
 
 import mindustry.ui.dialogs.BaseDialog;
-
-import java.net.InetSocketAddress;
-import java.net.Socket;
 
 import crystal.ui.window.TestWindow;
 
@@ -24,8 +24,8 @@ public class Initializer {
 
         if(onlineMode) {
             githubDatabase.init();
-            Jval test = githubDatabase.getDatabase("Info.json");
-            Log.info(test.get("notice"));
+            Jval.JsonArray ja = githubDatabase.getDatabase("Info.json").get("notice").asArray();
+            Log.info(ja.get(0));
         }
 
         if(debugMode) {
