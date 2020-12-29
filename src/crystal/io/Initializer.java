@@ -3,6 +3,7 @@ package crystal.io;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import arc.Core;
 import arc.files.*;
 import arc.util.*;
 import arc.util.serialization.Jval;
@@ -16,24 +17,30 @@ import static crystal.Vars.*;
 
 public class Initializer {
 
-    public Initializer(){}
+    public Initializer() {
+    }
 
     public void init() {
+        Fi tempFi;
         GithubDatabase githubDatabase = new GithubDatabase();
         onlineMode = netConnection();
 
-        if(onlineMode) {
+        if (onlineMode) {
             githubDatabase.init();
             Jval.JsonArray ja = githubDatabase.getDatabase("Info.json").get("notice").asArray();
-            Log.info(ja.get(0));
+            for (int i = 0; i < ja.size; i++) {
+                Log.info(ja.get(i));
+            }
         }
 
-        if(debugMode) {
+        Log.info(Core.settings.getString("locale"));
+
+        if (debugMode && !android && !steam) {
             new TestWindow().draw();
         }
 
-        Fi tempFi;
         tempFi = new Fi(modDirectory.toString() + "/Crystal/data");
+
         if (!tempFi.exists()) {
             tempFi.mkdirs();
             mainDirectory = new Fi(modDirectory.toString() + "/Crystal");
@@ -41,7 +48,7 @@ public class Initializer {
 
         if (new Fi(modDirectory.toString() + "/Crystal/data/settings.bin").exists()) {
 
-        }else{
+        } else {
             if (onlineMode && false) {
                 BaseDialog dialog = new BaseDialog("@data.settings");
                 dialog.cont.add("@data.settings.updatequestion").row();
@@ -56,21 +63,22 @@ public class Initializer {
             }
         }
     }
-    private boolean netConnection(){
+
+
+    private boolean netConnection() {
         boolean connected = true;
         Socket socket = new Socket();
         InetSocketAddress tempISA = new InetSocketAddress("www.google.com", 80);
 
-        try{
+        try {
             socket.connect(tempISA, 3000);
             socket.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             connected = false;
         }
         return connected;
     }
 
-    private void installData(){
-
+    private void installData() {
     }
 }

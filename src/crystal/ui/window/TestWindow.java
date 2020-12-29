@@ -1,8 +1,6 @@
 package crystal.ui.window;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import arc.util.*;
 
 import crystal.io.SocketManager;
