@@ -1,0 +1,9 @@
+{
+  "name": "crystal",
+  "displayName": "Crystal edition",
+  "author": "AmateurPotion",
+  "main": "crystal.core.Crystal",
+  "description": "A jar mod.",
+  "version": 1.0,
+  "minGameVersion": 120
+}

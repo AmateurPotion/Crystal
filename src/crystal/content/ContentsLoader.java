@@ -9,9 +9,11 @@ public class ContentsLoader implements ContentList {
             new Artifacts(),
             new MBlocks(),
             new MItems(),
+            new MLiquids(),
             new TechTreeParser(),
             new ContentsOverwriter(),
     };
+
     public void load() {
             for(ContentList list : contents){
                 list.load();

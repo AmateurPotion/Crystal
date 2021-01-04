@@ -1,9 +1,10 @@
 {
-  "language-path" : {
-    "en" : ""
-  },
   "notice" : [
     "Hello!",
     "Test notice"
-  ]
+  ],
+  "languageVersion" : {
+    "ko" : 1
+  },
+  "resourceMod" : "https://raw.githubusercontent.com/AmateurPotion/Crystal/main/SimpleDatabase/Pre-release-1/ResourceMod/"
 }

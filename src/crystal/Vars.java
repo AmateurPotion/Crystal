@@ -3,9 +3,11 @@ package crystal;
 import arc.files.*;
 import arc.assets.*;
 
+import static mindustry.Vars.*;
+
 public class Vars {
     /** crystal edition main data directory **/
-    public static Fi mainDirectory;
+    public static Fi mainDirectory = new Fi(modDirectory.toString() + "/Crystal");
     /** Debug mode. **/
     public static Boolean debugMode = true;
     /** Internet connection **/

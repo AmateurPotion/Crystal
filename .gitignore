@@ -149,3 +149,6 @@ android/libs/
 
 # Api key
 fbcfssdkkey.json
+
+# custom command
+deploy.cmd

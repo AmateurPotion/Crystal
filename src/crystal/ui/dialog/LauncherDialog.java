@@ -1,6 +1,7 @@
 package crystal.ui.dialog;
 
 import arc.Core;
+import arc.files.Fi;
 import arc.graphics.Color;
 import arc.graphics.g2d.TextureAtlas;
 import arc.graphics.g2d.TextureRegion;
@@ -11,6 +12,8 @@ import mindustry.ui.Styles;
 import mindustry.ui.dialogs.BaseDialog;
 
 import crystal.ui.CustomUiList;
+
+import java.io.FileWriter;
 
 import static arc.Core.atlas;
 import static mindustry.Vars.*;
@@ -49,7 +52,7 @@ public class LauncherDialog extends BaseDialog {
         b.label(() -> (b.isOver() ? "[pink]" : "") + "$crystal.ui.asset" + "[]").pad(5);
         b.update(() -> {
                 im.setDrawable(assetIcon[b.isOver() ? 1 : 0]);
-        b.setColor(b.isOver() ? Color.pink : Color.white);
+                b.setColor(b.isOver() ? Color.pink : Color.white);
         });
         table.add(b).size(230, 60);
 

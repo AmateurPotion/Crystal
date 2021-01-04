@@ -17,6 +17,8 @@ public class MBlocks implements ContentList {
     public void load() {
         charger = new ArtifactActivator("charger"){{
             requirements(Category.effect, with(MItems.coreResource, 1, Items.copper, 1000, Items.lead, 500));
+            hasLiquids = true;
+            liquidCapacity = 100f;
             size = 1;
         }};
 

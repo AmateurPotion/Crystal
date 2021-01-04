@@ -11,11 +11,13 @@ import arc.util.serialization.Jval;
 import mindustry.ui.dialogs.BaseDialog;
 
 import crystal.ui.window.TestWindow;
+import crystal.io.resources.ResourceMod;
 
 import static mindustry.Vars.*;
 import static crystal.Vars.*;
 
 public class Initializer {
+    private final FileManager fileManager = new FileManager();
 
     public Initializer() {
     }
@@ -28,6 +30,7 @@ public class Initializer {
         if (onlineMode) {
             githubDatabase.init();
             Jval.JsonArray ja = githubDatabase.getDatabase("Info.json").get("notice").asArray();
+
             for (int i = 0; i < ja.size; i++) {
                 Log.info(ja.get(i));
             }
@@ -39,21 +42,19 @@ public class Initializer {
             new TestWindow().draw();
         }
 
-        tempFi = new Fi(modDirectory.toString() + "/Crystal/data");
-
-        if (!tempFi.exists()) {
-            tempFi.mkdirs();
-            mainDirectory = new Fi(modDirectory.toString() + "/Crystal");
-        }
+        fileManager.mkdir(new Fi(modDirectory.toString() + "/Crystal/data"));
 
         if (new Fi(modDirectory.toString() + "/Crystal/data/settings.bin").exists()) {
 
         } else {
-            if (onlineMode && false) {
+            if (onlineMode) {
                 BaseDialog dialog = new BaseDialog("@data.settings");
+                float X = dialog.getWidth(), Y = dialog.getHeight();
                 dialog.cont.add("@data.settings.updatequestion").row();
-                dialog.cont.button("@yes", this::installData).size(50f, 50f);
-                dialog.cont.button("@no", dialog::hide).size(100f, 50f);
+                dialog.cont.button("@yes", this::installData)
+                        .size(80f, 50f);
+                dialog.cont.button("@no", dialog::hide)
+                        .size(80f, 50f);
                 dialog.show();
             } else {
                 BaseDialog dialog = new BaseDialog("@data.settings");
